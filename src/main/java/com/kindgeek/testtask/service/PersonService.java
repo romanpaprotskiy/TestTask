@@ -4,11 +4,9 @@ package com.kindgeek.testtask.service;
 import com.kindgeek.testtask.entity.Person;
 import com.kindgeek.testtask.entity.Position;
 import com.kindgeek.testtask.entity.Project;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public interface PersonService {
 
     List<Person> getPersons();
@@ -21,11 +19,11 @@ public interface PersonService {
 
     Person add(Person person);
 
-    Person update(long id,Person person);
+    Person update(Person person);
 
-    Project getProject();
+    Project getProject(long id);
 
-    Position getPosition();
+    Position getPosition(long id);
 
 
 }

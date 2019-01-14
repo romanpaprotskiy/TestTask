@@ -30,13 +30,13 @@ public class Person {
     @JoinColumn(name = "position_id")
     private Position position;
 
-    public Long getId() {
-        return id;
-    }
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     private Project project;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;

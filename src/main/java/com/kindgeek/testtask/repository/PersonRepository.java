@@ -14,6 +14,10 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     Person findByNameLike(String name);
 
+    Person findById(long id);
+
+    Person deleteById(long id);
+
     @Modifying
     @Query("update Person p set p.name = :name,p.email = :email,p.phoneNumber = :phone," +
             "p.position = :position,p.project = :project where p.id = :id")
