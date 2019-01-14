@@ -1,8 +1,5 @@
 package com.kindgeek.testtask.entity;
 
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -10,7 +7,6 @@ import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "Person")
-@NoArgsConstructor
 public class Person {
 
     @Id
@@ -27,12 +23,16 @@ public class Person {
     private String email;
 
     @Column(name = "phoneNumber")
-    @Pattern(regexp = "^(((\\+[0-9])?)([0-9]{9,10}))$")
+    @Pattern(regexp = "^(((\\+[0-9]{3})?)([0-9]{9,10}))$")
     private String phoneNumber;
 
-    @OneToOne(mappedBy = "person",cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,optional = false)
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "position_id")
     private Position position;
+
+    public Long getId() {
+        return id;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
@@ -48,6 +48,14 @@ public class Person {
 
     public Position getPosition() {
         return position;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public void setPosition(Position position) {

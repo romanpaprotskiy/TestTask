@@ -1,6 +1,7 @@
 package com.kindgeek.testtask.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -13,6 +14,7 @@ public class Department {
     private Long id;
 
     @Column(name = "department_name")
+    @NotNull(message = "Name cannot be null")
     private String name;
 
     @OneToMany(mappedBy = "department",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
@@ -33,4 +35,6 @@ public class Department {
     public void setPositions(List<Position> positions) {
         this.positions = positions;
     }
+
+
 }

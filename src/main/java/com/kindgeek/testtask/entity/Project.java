@@ -2,6 +2,7 @@ package com.kindgeek.testtask.entity;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -15,6 +16,7 @@ public class Project {
     private Long id;
 
     @Column(name = "project_name")
+    @NotNull(message = "Name cannot be null")
     private String name;
 
     @Column(name = "project_description")
@@ -46,4 +48,6 @@ public class Project {
     public void setPersons(List<Person> persons) {
         this.persons = persons;
     }
+
+
 }
