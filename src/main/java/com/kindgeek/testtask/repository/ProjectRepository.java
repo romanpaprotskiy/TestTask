@@ -10,8 +10,5 @@ public interface ProjectRepository extends JpaRepository<Project,Long> {
 
     Project findByNameLike(String name);
 
-    Project findById(long id);
-
-    Project deleteById(long id);
 
 }

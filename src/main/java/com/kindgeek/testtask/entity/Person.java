@@ -34,14 +34,10 @@ public class Person implements Serializable {
     @JsonManagedReference
     private Position position;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id")
     @JsonBackReference
     private Project project;
-    
-    public Person(){
-
-    }
 
     @Override
     public int hashCode() {

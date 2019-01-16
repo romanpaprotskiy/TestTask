@@ -84,7 +84,7 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public Person getPersons(Long id) {
+    public Person getPerson(Long id) {
         return positionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Position " + id + " not found"))
                 .getPerson();

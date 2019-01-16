@@ -19,19 +19,15 @@ public class Position {
     @NotNull(message = "Name cannot be null")
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "person_id")
     @JsonBackReference
     private Person person;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
     @JsonBackReference
     private Department department;
-
-    public Position() {
-
-    }
 
     @Override
     public int hashCode(){

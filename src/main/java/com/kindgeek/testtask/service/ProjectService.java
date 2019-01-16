@@ -2,6 +2,7 @@ package com.kindgeek.testtask.service;
 
 
 
+import com.kindgeek.testtask.entity.Person;
 import com.kindgeek.testtask.entity.Project;
 
 import java.util.List;
@@ -10,15 +11,19 @@ public interface ProjectService {
 
     List<Project> getProjects();
 
-    Project getById(long id);
+    Project getById(Long id);
 
     Project getByName(String name);
 
-    void delete(long id);
+    void delete(Long id);
 
     Project add(Project project);
 
-    Project update(long id,Project project);
+    Project update(Long id,Project project);
 
+    List<Person> getPersons(Long id);
 
+    Project addPerson(Long id,Person person);
+
+    Project removePerson(Long id,Person person);
 }

@@ -1,7 +1,6 @@
 package com.kindgeek.testtask.service;
 
 
-
 import com.kindgeek.testtask.entity.Department;
 import com.kindgeek.testtask.entity.Person;
 import com.kindgeek.testtask.entity.Position;
@@ -20,9 +19,9 @@ public interface PositionService {
 
     Position add(Position person);
 
-    Position update(Long id,Position person);
+    Position update(Long id, Position person);
 
     Department getDepartment(Long id);
 
-    Person getPersons(Long id);
+    Person getPerson(Long id);
 }

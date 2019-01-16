@@ -1,6 +1,8 @@
 package com.kindgeek.testtask.controller;
 
 
+import com.kindgeek.testtask.entity.Department;
+import com.kindgeek.testtask.entity.Person;
 import com.kindgeek.testtask.entity.Position;
 import com.kindgeek.testtask.exception.ResourceNotFoundException;
 import com.kindgeek.testtask.service.PositionService;
@@ -46,6 +48,16 @@ public class PositionController {
         } else {
             throw new ResourceNotFoundException("personId " + positionId + " not found");
         }
+    }
+
+    @GetMapping("/{positionId}/person")
+    public Person getPerson(@PathVariable Long positionId){
+        return positionService.getById(positionId).getPerson();
+    }
+
+    @GetMapping("/{positionId}/department")
+    public Department getDepartment(@PathVariable Long positionId){
+        return positionService.getById(positionId).getDepartment();
     }
 
 

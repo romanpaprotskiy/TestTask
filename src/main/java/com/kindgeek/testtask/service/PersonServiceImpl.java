@@ -52,8 +52,7 @@ public class PersonServiceImpl implements PersonService {
         Position position = positionRepository.findById(person.getPosition().getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Position not found"));
 
-        person.setPosition(position);
-        position.setPerson(person);
+        person.addPosition(position);
 
         Project project = person.getProject() != null ? projectRepository.findById(person.getProject().getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Project not found")) : null;
@@ -81,7 +80,7 @@ public class PersonServiceImpl implements PersonService {
         person1.setPosition(position);
         position.setPerson(person1);
 
-        if (!person1.getProject().equals(project) && person1.getProject() != null) {
+        if (person1.getProject() != null && !person1.getProject().equals(project)) {
             Project project1 = projectRepository.findById(person1.getProject().getId())
                     .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
             project1.removePerson(person1);
@@ -96,10 +95,9 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Project getProject(Long id) {
-        Project project = personRepository.findById(id)
+        return personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("PersonId " + id + " not found"))
                 .getProject();
-        return project;
     }
 
     @Override
@@ -107,6 +105,31 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("PersonId " + id + " not found"))
                 .getPosition();
+    }
+
+    @Override
+    public Person addPosition(Long id,Position position) {
+
+        Position position1 = positionRepository.findById(position.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Position not found"));
+
+        Person person = personRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("PersonId " + id + " not found"));
+
+        person.addPosition(position1);
+        return personRepository.save(person);
+    }
+
+    @Override
+    public Person removePosition(Long id, Position position) {
+        Position position1 = positionRepository.findById(position.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Position not found"));
+
+        Person person = personRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("PersonId " + id + " not found"));
+
+        person.removePosition(position1);
+        return personRepository.save(person);
     }
 
 }
