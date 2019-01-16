@@ -77,8 +77,7 @@ public class PersonServiceImpl implements PersonService {
         person1.setName(person.getName());
         person1.setEmail(person.getEmail());
         person1.setPhoneNumber(person.getPhoneNumber());
-        person1.setPosition(position);
-        position.setPerson(person1);
+        person1.addPosition(position);
 
         if (person1.getProject() != null && !person1.getProject().equals(project)) {
             Project project1 = projectRepository.findById(person1.getProject().getId())
@@ -86,9 +85,7 @@ public class PersonServiceImpl implements PersonService {
             project1.removePerson(person1);
         }
 
-        if (project != null) {
-            project.addPerson(person1);
-        }
+        if (project != null) project.addPerson(person1);
 
         return personRepository.save(person1);
     }
@@ -108,9 +105,9 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person addPosition(Long id,Position position) {
+    public Person addPosition(Long id,Long positionId) {
 
-        Position position1 = positionRepository.findById(position.getId())
+        Position position1 = positionRepository.findById(positionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Position not found"));
 
         Person person = personRepository.findById(id)
@@ -121,8 +118,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person removePosition(Long id, Position position) {
-        Position position1 = positionRepository.findById(position.getId())
+    public Person removePosition(Long id, Long positionId) {
+        Position position1 = positionRepository.findById(positionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Position not found"));
 
         Person person = personRepository.findById(id)
@@ -131,5 +128,7 @@ public class PersonServiceImpl implements PersonService {
         person.removePosition(position1);
         return personRepository.save(person);
     }
+
+
 
 }

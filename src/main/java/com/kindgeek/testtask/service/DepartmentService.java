@@ -11,15 +11,15 @@ public interface DepartmentService {
 
     List<Department> getDepartments();
 
-    Department getById(long id);
+    Department getById(Long id);
 
     Department getByName(String name);
 
-    Department delete(long id);
+    void delete(Long id);
 
     Department add(Department department);
 
-    Department update(long id,Department department);
+    Department update(Long id,Department department);
 
     List<Position> getPositions();
 

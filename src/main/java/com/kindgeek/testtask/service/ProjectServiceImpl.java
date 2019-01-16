@@ -64,9 +64,9 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project addPerson(Long id, Person person) {
+    public Project addPerson(Long id, Long personId) {
 
-        Person person1 = personRepository.findById(person.getId())
+        Person person1 = personRepository.findById(personId)
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found"));
 
         Project project = projectRepository.findById(id)
@@ -77,8 +77,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project removePerson(Long id, Person person) {
-        Person person1 = personRepository.findById(person.getId())
+    public Project removePerson(Long id, Long personId) {
+        Person person1 = personRepository.findById(personId)
                 .orElseThrow(() -> new ResourceNotFoundException("Person not found"));
 
         Project project = projectRepository.findById(id)

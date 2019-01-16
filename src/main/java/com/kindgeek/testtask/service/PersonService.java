@@ -25,7 +25,7 @@ public interface PersonService {
 
     Position getPosition(Long id);
 
-    Person addPosition(Long id,Position position);
+    Person addPosition(Long id,Long positionId);
 
-    Person removePosition(Long id,Position position);
+    Person removePosition(Long id,Long positionId);
 }

@@ -64,4 +64,14 @@ public class PersonController {
         return personService.getPosition(personId);
     }
 
+    @PutMapping("/{personId}/position/{positionId}")
+    public Person addPosition(@PathVariable Long personId, @PathVariable Long positionId){
+        return personService.addPosition(personId,positionId);
+    }
+
+    @DeleteMapping("/{personId}/position/{positionId}")
+    public Person removePosition(@PathVariable Long personId, @PathVariable Long positionId){
+        return personService.removePosition(personId,positionId);
+    }
+
 }

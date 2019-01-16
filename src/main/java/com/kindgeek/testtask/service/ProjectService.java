@@ -23,7 +23,7 @@ public interface ProjectService {
 
     List<Person> getPersons(Long id);
 
-    Project addPerson(Long id,Person person);
+    Project addPerson(Long id,Long personId);
 
-    Project removePerson(Long id,Person person);
+    Project removePerson(Long id,Long personId);
 }
