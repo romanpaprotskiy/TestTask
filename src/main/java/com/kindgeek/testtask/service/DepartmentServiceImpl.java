@@ -5,6 +5,7 @@ import com.kindgeek.testtask.entity.Department;
 import com.kindgeek.testtask.entity.Position;
 import com.kindgeek.testtask.exception.ResourceNotFoundException;
 import com.kindgeek.testtask.repository.DepartmentRepository;
+import com.kindgeek.testtask.repository.PositionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Autowired
     private DepartmentRepository departmentRepository;
+    @Autowired
+    private PositionRepository positionRepository;
 
     @Override
     public List<Department> getDepartments() {
@@ -39,16 +42,50 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department add(Department department) {
-        return null;
+        return departmentRepository.save(department);
     }
 
     @Override
     public Department update(Long id, Department department) {
-        return null;
+
+        Department department1 = departmentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("DepartmentId " + id + " not found"));
+
+        department1.setName(department.getName());
+        return departmentRepository.save(department1);
     }
 
     @Override
-    public List<Position> getPositions() {
-        return null;
+    public List<Position> getPositions(Long id) {
+        return departmentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("DepartmentId " + id + " not found"))
+                .getPositions();
     }
+
+    @Override
+    public Department addPosition(Long id, Long positionId) {
+
+        Department department = departmentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("DepartmentId " + id + " not found"));
+
+        Position position = positionRepository.findById(positionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Position not found"));
+
+        department.addPosition(position);
+        return departmentRepository.save(department);
+    }
+
+    @Override
+    public Department removePosition(Long id, Long positionId) {
+
+        Department department = departmentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("DepartmentId " + id + " not found"));
+
+        Position position = positionRepository.findById(positionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Position not found"));
+
+        department.removePosition(position);
+        return departmentRepository.save(department);
+    }
+
 }

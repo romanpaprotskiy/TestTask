@@ -21,6 +21,9 @@ public interface DepartmentService {
 
     Department update(Long id,Department department);
 
-    List<Position> getPositions();
+    List<Position> getPositions(Long id);
 
+    Department addPosition(Long id,Long positionId);
+
+    Department removePosition(Long id,Long positionId);
 }
