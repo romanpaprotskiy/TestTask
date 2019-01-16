@@ -10,8 +10,5 @@ public interface DepartmentRepository extends JpaRepository<Department,Long> {
 
     Department findByNameLike(String name);
 
-    Department findById(long id);
-
-    Department deleteById(long id);
 
 }

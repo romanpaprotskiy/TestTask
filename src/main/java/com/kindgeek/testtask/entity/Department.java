@@ -1,5 +1,7 @@
 package com.kindgeek.testtask.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
 public class Department {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "department_id")
     private Long id;
 
@@ -17,8 +19,27 @@ public class Department {
     @NotNull(message = "Name cannot be null")
     private String name;
 
-    @OneToMany(mappedBy = "department",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Position> positions;
+
+    public void addPosition(Position position){
+        positions.add(position);
+        position.setDepartment(this);
+    }
+
+    public void removePosition(Position position){
+        positions.remove(position);
+        position.setDepartment(null);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -35,6 +56,4 @@ public class Department {
     public void setPositions(List<Position> positions) {
         this.positions = positions;
     }
-
-
 }

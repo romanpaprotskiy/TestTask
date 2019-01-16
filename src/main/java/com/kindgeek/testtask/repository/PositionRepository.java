@@ -12,5 +12,4 @@ public interface PositionRepository extends JpaRepository<Position,Long> {
 
     Position findById(long id);
 
-    Position deleteById(long id);
 }

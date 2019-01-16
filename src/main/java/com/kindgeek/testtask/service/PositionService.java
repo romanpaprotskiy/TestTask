@@ -12,17 +12,17 @@ public interface PositionService {
 
     List<Position> getPositions();
 
-    Position getById(long id);
+    Position getById(Long id);
 
     Position getByName(String name);
 
-    void delete(long id);
+    void delete(Long id);
 
     Position add(Position person);
 
-    Position update(long id,Position person);
+    Position update(Long id,Position person);
 
-    Department getDepartment();
+    Department getDepartment(Long id);
 
-    List<Person> getPersons();
+    Person getPersons(Long id);
 }

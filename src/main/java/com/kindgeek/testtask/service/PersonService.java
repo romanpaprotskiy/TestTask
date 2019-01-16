@@ -11,19 +11,18 @@ public interface PersonService {
 
     List<Person> getPersons();
 
-    Person getById(long id);
+    Person getById(Long id);
 
-    Person getByName(String name);
+    List<Person> getByName(String name);
 
-    Person delete(long id);
+    void delete(Long id);
 
     Person add(Person person);
 
-    Person update(Person person);
+    Person update(Long id,Person person);
 
-    Project getProject(long id);
+    Project getProject(Long id);
 
-    Position getPosition(long id);
-
+    Position getPosition(Long id);
 
 }

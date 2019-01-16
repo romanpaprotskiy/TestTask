@@ -1,16 +1,17 @@
 package com.kindgeek.testtask.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Entity
 @Table(name = "position")
 public class Position {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "position_id")
     private Long id;
 
@@ -18,20 +19,31 @@ public class Position {
     @NotNull(message = "Name cannot be null")
     private String name;
 
-    @OneToMany(mappedBy = "position",fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private List<Person> persons;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "person_id")
+    @JsonBackReference
+    private Person person;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
+    @JsonBackReference
     private Department department;
 
-    public List<Person> getPerson() {
-        return persons;
+    public Position() {
+
     }
 
-    public void setPerson(List<Person> persons) {
-        this.persons = persons;
+    @Override
+    public int hashCode(){
+        return Long.hashCode(id);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -40,6 +52,14 @@ public class Position {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public Department getDepartment() {
