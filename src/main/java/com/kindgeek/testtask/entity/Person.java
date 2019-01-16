@@ -8,6 +8,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Person")
@@ -30,7 +31,7 @@ public class Person implements Serializable {
     @Pattern(regexp = "^(((\\+380)?)([0-9]{9}))$")
     private String phoneNumber;
 
-    @OneToOne(mappedBy = "person", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
     private Position position;
 
@@ -38,11 +39,6 @@ public class Person implements Serializable {
     @JoinColumn(name = "project_id")
     @JsonBackReference
     private Project project;
-
-    @Override
-    public int hashCode() {
-        return Long.hashCode(id);
-    }
 
     public void addPosition(Position position) {
         this.position = position;
@@ -63,6 +59,11 @@ public class Person implements Serializable {
         Person person = (Person) o;
         return id.equals(person.id) &&
                 name.equals(person.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, email, phoneNumber);
     }
 
     public Long getId() {
