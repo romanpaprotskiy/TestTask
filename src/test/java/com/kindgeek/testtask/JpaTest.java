@@ -1,8 +1,6 @@
 package com.kindgeek.testtask;
 
 
-import com.kindgeek.testtask.entity.Person;
-import com.kindgeek.testtask.entity.Position;
 import com.kindgeek.testtask.service.PersonService;
 import com.kindgeek.testtask.service.PositionService;
 import org.junit.Test;
@@ -22,14 +20,6 @@ public class JpaTest {
 
     @Test
     public void testPersonRepository(){
-        Position position = positionService.getById(8L);
-        Person person = personService.getById(5L);
-
-        Person person1 = new Person();
-        person1.setName("Serduk A.V");
-        person1.setEmail("rgrhg@gmail.com");
-        person1.setPosition(position);
-        personService.update(5L,person1);
 
     }
 }

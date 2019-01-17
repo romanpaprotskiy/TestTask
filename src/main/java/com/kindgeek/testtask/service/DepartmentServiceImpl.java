@@ -14,10 +14,14 @@ import java.util.List;
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
+    private final DepartmentRepository departmentRepository;
+    private final PositionRepository positionRepository;
+
     @Autowired
-    private DepartmentRepository departmentRepository;
-    @Autowired
-    private PositionRepository positionRepository;
+    public DepartmentServiceImpl(DepartmentRepository departmentRepository, PositionRepository positionRepository) {
+        this.departmentRepository = departmentRepository;
+        this.positionRepository = positionRepository;
+    }
 
     @Override
     public List<Department> getDepartments() {

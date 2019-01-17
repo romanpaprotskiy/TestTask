@@ -16,14 +16,19 @@ import java.util.List;
 @Service
 public class PersonServiceImpl implements PersonService {
 
-    @Autowired
-    private PersonRepository personRepository;
+    private final PersonRepository personRepository;
+
+    private final PositionRepository positionRepository;
+
+    private final ProjectRepository projectRepository;
 
     @Autowired
-    private PositionRepository positionRepository;
-
-    @Autowired
-    private ProjectRepository projectRepository;
+    public PersonServiceImpl(PersonRepository personRepository, PositionRepository positionRepository,
+                             ProjectRepository projectRepository) {
+        this.personRepository = personRepository;
+        this.positionRepository = positionRepository;
+        this.projectRepository = projectRepository;
+    }
 
     @Override
     public List<Person> getPersons() {
