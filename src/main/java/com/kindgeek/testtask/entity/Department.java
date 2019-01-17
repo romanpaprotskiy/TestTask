@@ -20,7 +20,7 @@ public class Department {
     private String name;
 
     @OneToMany(mappedBy = "department", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference(value = "departmentReference")
     private List<Position> positions;
 
     public void addPosition(Position position){

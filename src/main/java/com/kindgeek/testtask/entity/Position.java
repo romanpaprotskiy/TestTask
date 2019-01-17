@@ -21,12 +21,12 @@ public class Position {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "person_id")
-    @JsonBackReference
+    @JsonBackReference(value = "personReference")
     private Person person;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
-    @JsonBackReference
+    @JsonBackReference(value = "departmentReference")
     private Department department;
 
     @Override

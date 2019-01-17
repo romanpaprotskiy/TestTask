@@ -1,7 +1,9 @@
 package com.kindgeek.testtask.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -27,7 +29,7 @@ public class Project {
     private String description;
 
     @OneToMany(mappedBy = "project",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonManagedReference(value = "projectReference")
     private List<Person> persons;
 
     public void addPerson(Person person){

@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project,Long> {
 
-    @Query("select p from Position p where p.name like %:name%")
+    @Query("select p from Project p where p.name like %:name%")
     List<Project> findByNameLike(String name);
 
 
