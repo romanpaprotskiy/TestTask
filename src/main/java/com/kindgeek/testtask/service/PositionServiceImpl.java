@@ -15,12 +15,16 @@ import java.util.List;
 @Service
 public class PositionServiceImpl implements PositionService {
 
+    private final PositionRepository positionRepository;
+    private final PersonRepository personRepository;
+    private final DepartmentRepository departmentRepository;
+
     @Autowired
-    private PositionRepository positionRepository;
-    @Autowired
-    private PersonRepository personRepository;
-    @Autowired
-    private DepartmentRepository departmentRepository;
+    public PositionServiceImpl(PositionRepository positionRepository, PersonRepository personRepository, DepartmentRepository departmentRepository) {
+        this.positionRepository = positionRepository;
+        this.personRepository = personRepository;
+        this.departmentRepository = departmentRepository;
+    }
 
     @Override
     public List<Position> getPositions() {
@@ -34,7 +38,7 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public Position getByName(String name) {
+    public List<Position> getByName(String name) {
         return positionRepository.findByNameLike(name);
     }
 

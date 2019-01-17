@@ -13,13 +13,13 @@ public interface PositionService {
 
     Position getById(Long id);
 
-    Position getByName(String name);
+    List<Position> getByName(String name);
 
     void delete(Long id);
 
     Position add(Position person);
 
-    Position update(Long id, Position person);
+    Position update(Long id, Position position);
 
     Department getDepartment(Long id);
 

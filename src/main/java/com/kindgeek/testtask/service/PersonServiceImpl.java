@@ -113,7 +113,7 @@ public class PersonServiceImpl implements PersonService {
     public Person addPosition(Long id,Long positionId) {
 
         Position position1 = positionRepository.findById(positionId)
-                .orElseThrow(() -> new ResourceNotFoundException("Position not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("PositionId" + positionId + " not found"));
 
         Person person = personRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("PersonId " + id + " not found"));
@@ -133,7 +133,6 @@ public class PersonServiceImpl implements PersonService {
         person.removePosition(position1);
         return personRepository.save(person);
     }
-
 
 
 }
