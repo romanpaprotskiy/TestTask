@@ -13,7 +13,7 @@ public interface ProjectService {
 
     Project getById(Long id);
 
-    Project getByName(String name);
+    List<Project> getByName(String name);
 
     void delete(Long id);
 

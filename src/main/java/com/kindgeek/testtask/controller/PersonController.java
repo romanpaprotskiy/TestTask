@@ -33,7 +33,7 @@ public class PersonController {
 
     /**
      * @param name - search by name like
-     * @return all persons in database if name is present - return person with name like
+     * @return all persons in database if name is present - return person with like name
      */
     @GetMapping
     public List<Person> getAllPersons(@RequestParam(required = false) String name) {
@@ -110,7 +110,6 @@ public class PersonController {
     /**
      * @param personId - id person
      * @return person project
-     * @throws ResourceNotFoundException if person id not found
      */
     @GetMapping("/{personId}/project")
     public Project getProject(@PathVariable Long personId) {
@@ -131,7 +130,6 @@ public class PersonController {
      * @param personId   - id person
      * @param positionId - id position
      * @return person with added position
-     * @throws ResourceNotFoundException if personId or positionId not found
      */
     @PutMapping("/{personId}/position")
     public Person addPositionToPerson(@PathVariable Long personId, @RequestParam(name = "position") Long positionId) {

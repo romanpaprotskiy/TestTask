@@ -14,10 +14,14 @@ import java.util.List;
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
+    private final ProjectRepository projectRepository;
+    private final PersonRepository personRepository;
+
     @Autowired
-    private ProjectRepository projectRepository;
-    @Autowired
-    private PersonRepository personRepository;
+    public ProjectServiceImpl(ProjectRepository projectRepository, PersonRepository personRepository) {
+        this.projectRepository = projectRepository;
+        this.personRepository = personRepository;
+    }
 
     @Override
     public List<Project> getProjects() {
@@ -31,7 +35,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project getByName(String name) {
+    public List<Project> getByName(String name) {
         return projectRepository.findByNameLike(name);
     }
 

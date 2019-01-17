@@ -13,17 +13,17 @@ public interface DepartmentService {
 
     Department getById(Long id);
 
-    Department getByName(String name);
+    List<Department> getByName(String name);
 
     void delete(Long id);
 
     Department add(Department department);
 
-    Department update(Long id,Department department);
+    Department update(Long id, Department department);
 
     List<Position> getPositions(Long id);
 
-    Department addPosition(Long id,Long positionId);
+    Department addPosition(Long id, Long positionId);
 
-    Department removePosition(Long id,Long positionId);
+    Department removePosition(Long id, Long positionId);
 }
