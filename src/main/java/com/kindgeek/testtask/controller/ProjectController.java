@@ -16,8 +16,12 @@ import java.util.List;
 @RequestMapping("/projects")
 public class ProjectController {
 
+    private final ProjectService projectService;
+
     @Autowired
-    private ProjectService projectService;
+    public ProjectController(ProjectService projectService) {
+        this.projectService = projectService;
+    }
 
     @GetMapping
     public List<Project> getProjects() {
@@ -52,13 +56,13 @@ public class ProjectController {
         return projectService.getPersons(projectId);
     }
 
-    @PutMapping("/{projectId}/persons/{personId}")
-    public Project addPerson(@PathVariable Long projectId, @PathVariable Long personId) {
+    @PutMapping("/{projectId}/persons")
+    public Project addPerson(@PathVariable Long projectId, @RequestParam(name = "person") Long personId) {
         return projectService.addPerson(projectId, personId);
     }
 
-    @DeleteMapping("/{projectId}/persons/{personId}")
-    public Project removePerson(@PathVariable Long projectId, @PathVariable Long personId) {
+    @DeleteMapping("/{projectId}/persons")
+    public Project removePerson(@PathVariable Long projectId, @RequestParam(name = "person") Long personId) {
         return projectService.removePerson(projectId, personId);
     }
 
